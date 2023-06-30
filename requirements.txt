@@ -14,4 +14,3 @@ pathlib
 scipy
 matplotlib
 seaborn
-scikit-plot==0.3.7
