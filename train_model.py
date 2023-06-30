@@ -36,7 +36,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 from sklearn.inspection import permutation_importance
-import scikitplot as skplt
+# import scikitplot as skplt
 from yellowbrick.model_selection import FeatureImportances
 import scipy.stats as stats
 import joblib
