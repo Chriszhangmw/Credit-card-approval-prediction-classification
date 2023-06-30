@@ -14,4 +14,4 @@ pathlib
 scipy
 matplotlib
 seaborn
-scikitplot
+scikit-plot
