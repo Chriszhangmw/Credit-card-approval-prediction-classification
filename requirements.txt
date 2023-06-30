@@ -6,4 +6,12 @@ streamlit>=1.8.1
 boto3==1.20.34
 joblib>=0.11,<=1.0.1
 streamlit-lottie==0.0.3
-
+scikitplot
+yellowbrick
+pandas_profiling
+missingno
+pathlib
+scipy
+matplotlib
+seaborn
+scikitplot
