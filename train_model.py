@@ -402,47 +402,47 @@ def confusion_matrix_func(model_trn,model_name,final_model=False):
         return pil_image
 
 # Function to plot the roc curve
-def roc_curve_func(model_trn,model_name,final_model=False):
-    if final_model == False:
-        # check if y probabilities file exists, if not create it
-        y_proba_path = Path('saved_models/{0}/y_cc_train_proba_{0}.sav'.format(model_name))
-        try:
-            y_proba_path.resolve(strict=True)
-        except FileNotFoundError:
-            y_cc_train_proba = model_trn.predict_proba(X_cc_train_prep)
-            joblib.dump(y_cc_train_proba,y_proba_path)
-        else:
-            # if path exist load the y probabilities file
-            y_cc_train_proba = joblib.load(y_proba_path)
-        skplt.metrics.plot_roc(y_cc_train_prep, y_cc_train_proba, title = 'ROC curve for {0}'.format(model_name), cmap='cool',figsize=(8,6), text_fontsize='large')
-        #remove the grid
-        plt.grid(visible=None)
-        plt.show()
-        print('\n')
-        fig = plt.gcf()
-        fig.canvas.draw()
-        pil_image = Image.frombytes('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb())
-        return pil_image
-    else:
-        # check if y probabilities file exists, if not create it
-        y_proba_path_final = Path('saved_models_final/{0}/y_cc_train_proba_{0}_final.sav'.format(model_name))
-        try:
-            y_proba_path_final.resolve(strict=True)
-        except FileNotFoundError:
-            y_cc_train_proba_final = model_trn.predict_proba(X_cc_train_prep)
-            joblib.dump(y_cc_train_proba_final,y_proba_path_final)
-        else:
-            # if path exist load the y probabilities file
-            y_cc_train_proba_final = joblib.load(y_proba_path_final)
-        skplt.metrics.plot_roc(y_cc_train_prep, y_cc_train_proba_final, title = 'ROC curve for {0}'.format(model_name), cmap='cool',figsize=(8,6), text_fontsize='large')
-        #remove the grid
-        plt.grid(visible=None)
-        plt.show()
-        print('\n')
-        fig = plt.gcf()
-        fig.canvas.draw()
-        pil_image = Image.frombytes('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb())
-        return pil_image
+# def roc_curve_func(model_trn,model_name,final_model=False):
+#     if final_model == False:
+#         # check if y probabilities file exists, if not create it
+#         y_proba_path = Path('saved_models/{0}/y_cc_train_proba_{0}.sav'.format(model_name))
+#         try:
+#             y_proba_path.resolve(strict=True)
+#         except FileNotFoundError:
+#             y_cc_train_proba = model_trn.predict_proba(X_cc_train_prep)
+#             joblib.dump(y_cc_train_proba,y_proba_path)
+#         else:
+#             # if path exist load the y probabilities file
+#             y_cc_train_proba = joblib.load(y_proba_path)
+#         skplt.metrics.plot_roc(y_cc_train_prep, y_cc_train_proba, title = 'ROC curve for {0}'.format(model_name), cmap='cool',figsize=(8,6), text_fontsize='large')
+#         #remove the grid
+#         plt.grid(visible=None)
+#         plt.show()
+#         print('\n')
+#         fig = plt.gcf()
+#         fig.canvas.draw()
+#         pil_image = Image.frombytes('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb())
+#         return pil_image
+#     else:
+#         # check if y probabilities file exists, if not create it
+#         y_proba_path_final = Path('saved_models_final/{0}/y_cc_train_proba_{0}_final.sav'.format(model_name))
+#         try:
+#             y_proba_path_final.resolve(strict=True)
+#         except FileNotFoundError:
+#             y_cc_train_proba_final = model_trn.predict_proba(X_cc_train_prep)
+#             joblib.dump(y_cc_train_proba_final,y_proba_path_final)
+#         else:
+#             # if path exist load the y probabilities file
+#             y_cc_train_proba_final = joblib.load(y_proba_path_final)
+#         skplt.metrics.plot_roc(y_cc_train_prep, y_cc_train_proba_final, title = 'ROC curve for {0}'.format(model_name), cmap='cool',figsize=(8,6), text_fontsize='large')
+#         #remove the grid
+#         plt.grid(visible=None)
+#         plt.show()
+#         print('\n')
+#         fig = plt.gcf()
+#         fig.canvas.draw()
+#         pil_image = Image.frombytes('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb())
+#         return pil_image
 
 # Function to display the classification report
 def score_func(model_trn, model_name, final_model=False):
@@ -513,12 +513,13 @@ def process_train_model(model_name):
     # print the scores from the classification report
     class_report = score_func(model_trn, model_name)
     # plot the ROC curve
-    roc_curve_image = roc_curve_func(model_trn, model_name)
+    # roc_curve_image = roc_curve_func(model_trn, model_name)
     # plot the confusion matrix
     confusion_matrix_image = confusion_matrix_func(model_trn, model_name)
     # plot feature importance
     fearure_image = feat_importance_plot(model_trn, model_name)
     warnings.filterwarnings("ignore")
+    roc_curve_image = None
     return  class_report,roc_curve_image,confusion_matrix_image,fearure_image
 
 
